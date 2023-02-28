@@ -8,6 +8,7 @@ import { createRandomUserArray } from './testData';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UsersService } from './users/users.service';
       synchronize: true,
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

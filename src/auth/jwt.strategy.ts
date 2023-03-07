@@ -16,11 +16,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: any) {
+  async validate(payload: JwtPayload) {
     // strip password property before returning
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...result } = await this.usersService.findById(
-      payload.sub,
+      // we can safely disable this, since Nest automatically throws if the token is invalid
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      +payload.sub!,
     );
 
     const user: Omit<User, 'password'> = result;

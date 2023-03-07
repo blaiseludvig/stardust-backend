@@ -2,10 +2,13 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { jwtConstants } from './constants';
+import { UsersService } from 'src/users/users.service';
+import { JwtPayload } from 'jsonwebtoken';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(private readonly usersService: UsersService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -14,6 +17,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    return { userId: payload.sub };
+    // strip password property before returning
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...result } = await this.usersService.findById(
+      payload.sub,
+    );
+
+    const user: Omit<User, 'password'> = result;
+
+    return user;
   }
 }

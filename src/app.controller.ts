@@ -14,6 +14,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/local-auth.guard';
 import CreateUserDto from './users/dto/create-user.dto';
 import { User } from './users/entities/user.entity';
+import { ReqUser } from './users/user.decorator';
 import { UsersService } from './users/users.service';
 
 @Controller()
@@ -31,13 +32,13 @@ export class AppController {
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  async login(@Req() req: Express.Request) {
-    return this.authService.login(req.user);
+  async login(@ReqUser() user: ReqUser) {
+    return this.authService.login(user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Req() req: Express.Request) {
-    return req.user;
+  getProfile(@ReqUser() user: ReqUser) {
+    return user;
   }
 }

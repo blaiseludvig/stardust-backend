@@ -8,14 +8,14 @@ import {
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  userId: number;
+  userId!: number;
 
   @Column()
-  email: string;
+  email!: string;
 
   @Column()
-  password: string;
+  password!: string;
 
   @CreateDateColumn()
-  registartionDate: Date;
+  registartionDate!: Date;
 }

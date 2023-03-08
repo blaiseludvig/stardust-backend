@@ -3,8 +3,8 @@ import { IsDefined, IsEmail } from 'class-validator';
 export default class CreateUserDto {
   @IsDefined()
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsDefined()
-  password: string;
+  password!: string;
 }

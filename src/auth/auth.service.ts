@@ -14,7 +14,10 @@ export class AuthService {
   async validateUser(email: string, password: string) {
     const user = await this.usersService.findByEmail(email);
 
-    if (user && bcrypt.compareSync(password, user.password)) {
+    // we can safelay disable this, because Nest automatically rejects
+    // the request if it doesn't contain a password
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    if (user && bcrypt.compareSync(password, user.password!)) {
       // strip password property before returning
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;

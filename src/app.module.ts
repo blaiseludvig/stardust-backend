@@ -9,17 +9,20 @@ import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 import { UsersService } from './users/users.service';
 import { AuthModule } from './auth/auth.module';
+import { NotesModule } from './notes/notes.module';
+import { Note } from './notes/entities/note.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database: 'db.sql',
-      entities: [User],
+      entities: [User, Note],
       synchronize: true,
     }),
     UsersModule,
     AuthModule,
+    NotesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

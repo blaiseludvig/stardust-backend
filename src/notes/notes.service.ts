@@ -4,6 +4,7 @@ import { DataSource, EntityNotFoundError } from 'typeorm';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { Note } from './entities/note.entity';
+import { NoteNotFoundException } from './exceptions/note-not-found.exception';
 
 @Injectable()
 export class NotesService {
@@ -33,7 +34,15 @@ export class NotesService {
   }
 
   async findById(noteId: string) {
-    return await this.notesRepository.findOneByOrFail({ noteId });
+    try {
+      return await this.notesRepository.findOneByOrFail({ noteId });
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        throw new NoteNotFoundException();
+      }
+
+      throw error;
+    }
   }
   update(noteId: string, updateNoteDto: UpdateNoteDto) {
     return this.notesRepository.update(noteId, updateNoteDto);

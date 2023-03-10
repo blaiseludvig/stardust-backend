@@ -13,9 +13,11 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ReqUser } from 'src/users/user.decorator';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { EntityNotFoundFilter } from './exceptions/note-not-found.filter';
 import { NotesService } from './notes.service';
 
 @UseGuards(JwtAuthGuard)
+@UseFilters(new EntityNotFoundFilter())
 @Controller('notes')
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}

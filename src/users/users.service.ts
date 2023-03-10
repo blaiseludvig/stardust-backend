@@ -1,9 +1,10 @@
-import { DataSource } from 'typeorm';
+import { DataSource, EntityNotFoundError } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import UpdateUserDto from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import CreateUserDto from './dto/create-user.dto';
+import { UserDeletedException } from './exceptions/user-deleted.exception';
 
 @Injectable()
 export class UsersService {
@@ -22,8 +23,18 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  findById(userId: number) {
-    return this.userRepository.findOneByOrFail({ userId });
+  async findById(userId: number) {
+    try {
+      return await this.userRepository.findOneByOrFail({ userId });
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        // since Nest automatically throws if the token is invalid, the only
+        // case where this happens is when the user account is deleted
+        throw new UserDeletedException();
+      }
+
+      throw error;
+    }
   }
 
   findByEmail(email: string) {

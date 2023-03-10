@@ -1,3 +1,4 @@
+import { UserDeletedFilter } from './users/exceptions/user-deleted.filter';
 import {
   Body,
   Controller,
@@ -6,6 +7,7 @@ import {
   Get,
   Post,
   Req,
+  UseFilters,
   UseGuards,
 } from '@nestjs/common';
 import { AppService } from './app.service';
@@ -36,6 +38,7 @@ export class AppController {
     return this.authService.login(user);
   }
 
+  @UseFilters(UserDeletedFilter)
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@ReqUser() user: ReqUser) {

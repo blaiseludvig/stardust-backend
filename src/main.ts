@@ -7,6 +7,9 @@ async function bootstrap() {
 
   // enable transform for using default values in DTOs
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
+
+  app.enableCors();
+
   await app.listen(3000);
 }
 bootstrap();

@@ -1,12 +1,11 @@
 import { faker } from '@faker-js/faker';
 import * as bcrypt from 'bcrypt';
-import { User } from './users/entities/user.entity';
+import CreateUserDto from './users/dto/create-user.dto';
 
-export function createRandomUser(): Partial<User> {
+export function createRandomUser(): CreateUserDto {
   return {
     email: faker.internet.email(),
     password: bcrypt.hashSync(faker.internet.password(6), 10),
-    registartionDate: faker.date.recent(),
   };
 }
 

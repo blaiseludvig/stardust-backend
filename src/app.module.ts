@@ -1,7 +1,6 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import promptSync from 'prompt-sync';
-import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { createRandomUserArray } from './testData';
@@ -11,6 +10,7 @@ import { UsersService } from './users/users.service';
 import { AuthModule } from './auth/auth.module';
 import { NotesModule } from './notes/notes.module';
 import { Note } from './notes/entities/note.entity';
+import CreateUserDto from './users/dto/create-user.dto';
 
 @Module({
   imports: [
@@ -30,12 +30,11 @@ import { Note } from './notes/entities/note.entity';
 export class AppModule implements OnModuleInit {
   constructor(
     private readonly appService: AppService,
-    private readonly userService: UsersService,
-    private readonly dataSource: DataSource,
+    private readonly usersService: UsersService,
   ) {}
 
   async onModuleInit() {
-    if ((await this.userService.findAll()).length < 1) {
+    if ((await this.usersService.findAll()).length < 1) {
       const prompt = promptSync({ sigint: true });
       let answer = '';
 
@@ -45,9 +44,9 @@ export class AppModule implements OnModuleInit {
         ).toLowerCase();
 
         if (answer == 'y' || answer == '') {
-          await this.dataSource
-            .getRepository(User)
-            .save(createRandomUserArray(10));
+          createRandomUserArray(10).map((user) =>
+            this.usersService.create(user),
+          );
           return;
         } else if (answer == 'n') {
           return;

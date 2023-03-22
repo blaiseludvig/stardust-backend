@@ -17,6 +17,10 @@
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
     "moduleResolution": "Node",
-    "typeRoots": ["./types"]
+    "typeRoots": ["./types"],
+    "types": [
+      "@types/jest",
+      "node"
+    ]
   }
 }

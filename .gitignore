@@ -36,3 +36,4 @@ lerna-debug.log*
 
 # better-sqlite3 database
 db.sql
+test_db.sql

@@ -2,11 +2,11 @@ import { IsOptional } from 'class-validator';
 
 export class CreateNoteDto {
   @IsOptional()
-  title = '';
+  title? = '';
 
   @IsOptional()
-  type = 'text';
+  type? = 'text';
 
   @IsOptional()
-  content = '';
+  content? = '';
 }

@@ -8,7 +8,13 @@ async function bootstrap() {
   // enable transform for using default values in DTOs
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
-  app.enableCors();
+  app.enableCors({
+    maxAge: 7200,
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  });
 
   await app.listen(3000);
 }

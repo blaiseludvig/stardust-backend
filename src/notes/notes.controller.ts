@@ -14,6 +14,7 @@ import { ReqUser } from 'src/users/user.decorator';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { EntityNotFoundFilter } from './exceptions/note-not-found.filter';
+import { createRandomNote } from './god';
 import { NotesService } from './notes.service';
 
 @UseGuards(JwtAuthGuard)
@@ -35,6 +36,11 @@ export class NotesController {
   @Post()
   create(@ReqUser() user: ReqUser, @Body() dto: CreateNoteDto) {
     return this.notesService.create(user, dto);
+  }
+
+  @Post('/god')
+  god(@ReqUser() user: ReqUser) {
+    return this.notesService.create(user, createRandomNote());
   }
 
   @Patch(':id')

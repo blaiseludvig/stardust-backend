@@ -28,6 +28,9 @@ export class Note {
   @Column('boolean', { default: false })
   isDeleted!: boolean;
 
+  @Column('date', { nullable: true, default: null })
+  dateDeleted!: Date;
+
   @CreateDateColumn()
   dateCreated!: Date;
 

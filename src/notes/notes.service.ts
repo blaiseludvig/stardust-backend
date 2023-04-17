@@ -44,8 +44,16 @@ export class NotesService {
       throw error;
     }
   }
+
   update(noteId: string, updateNoteDto: UpdateNoteDto) {
     return this.notesRepository.update(noteId, updateNoteDto);
+  }
+
+  bin(noteId: string) {
+    return this.notesRepository.update(noteId, {
+      isDeleted: true,
+      dateDeleted: new Date().toISOString(),
+    });
   }
 
   async remove(noteId: string) {

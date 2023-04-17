@@ -48,6 +48,11 @@ export class NotesController {
     return this.notesService.update(id, updateNoteDto);
   }
 
+  @Delete('bin/:id')
+  bin(@Param('id') id: string) {
+    return this.notesService.bin(id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.notesService.remove(id);

@@ -17,7 +17,6 @@ import { EntityNotFoundFilter } from './exceptions/note-not-found.filter';
 import { createRandomNote } from './god';
 import { NotesService } from './notes.service';
 
-@UseGuards(JwtAuthGuard)
 @UseFilters(new EntityNotFoundFilter())
 @Controller('notes')
 export class NotesController {

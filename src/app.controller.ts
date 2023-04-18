@@ -18,6 +18,7 @@ import CreateUserDto from './users/dto/create-user.dto';
 import { User } from './users/entities/user.entity';
 import { ReqUser } from './users/user.decorator';
 import { UsersService } from './users/users.service';
+import { Public } from './auth/public.decorator';
 
 @Controller()
 export class AppController {
@@ -27,11 +28,13 @@ export class AppController {
     private readonly authService: AuthService,
   ) {}
 
+  @Public()
   @Post('/auth/signup')
   async register(@Body() dto: CreateUserDto) {
     return this.usersService.create(dto);
   }
 
+  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@ReqUser() user: ReqUser) {
@@ -39,7 +42,6 @@ export class AppController {
   }
 
   @UseFilters(UserDeletedFilter)
-  @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@ReqUser() user: ReqUser) {
     return user;

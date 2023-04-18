@@ -4,6 +4,6 @@ import { CreateNoteDto } from './create-note.dto';
 
 export class UpdateNoteDto extends PartialType(CreateNoteDto) {
   @IsDefined()
-  @ApiProperty()
+  @ApiProperty({ description: 'The id of the note to be updated' })
   noteId!: string;
 }

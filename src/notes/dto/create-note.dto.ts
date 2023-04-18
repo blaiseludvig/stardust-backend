@@ -1,12 +1,16 @@
+import { ApiPropertyOptional } from '@nestjs/swagger/dist';
 import { IsOptional } from 'class-validator';
 
 export class CreateNoteDto {
   @IsOptional()
-  title? = '';
+  @ApiPropertyOptional()
+  title?: string = '';
 
   @IsOptional()
-  type? = 'text';
+  @ApiPropertyOptional()
+  type?: string = 'text';
 
   @IsOptional()
-  content? = '';
+  @ApiPropertyOptional()
+  content?: string = '';
 }

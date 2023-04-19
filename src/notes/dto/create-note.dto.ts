@@ -9,17 +9,17 @@ export class CreateNoteDto {
       '<br>' +
       'Note: at least one of these properties must be defined.',
   })
-  title?: string = '';
+  title?: string;
 
   @IsOptional()
   @ApiPropertyOptional({
     description: 'The type of the note (currently not implemented)',
   })
-  type?: string = 'text';
+  type?: string;
 
   @IsOptional()
   @ApiPropertyOptional({
     description: 'The text content of the note',
   })
-  content?: string = '';
+  content?: string;
 }

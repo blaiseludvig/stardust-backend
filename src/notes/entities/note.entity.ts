@@ -16,13 +16,13 @@ export class Note {
   @ManyToOne(() => User, (user) => user.notes)
   user!: User;
 
-  @Column('text')
+  @Column('text', { default: '' })
   title!: string;
 
-  @Column('text')
+  @Column('text', { default: 'text' })
   type!: string;
 
-  @Column('text')
+  @Column('text', { default: '' })
   content!: string;
 
   @Column('boolean', { default: false })

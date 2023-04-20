@@ -67,15 +67,15 @@ export class NotesService {
   bin(noteId: string) {
     this.unarchive(noteId);
     return this.notesRepository.update(noteId, {
-      isDeleted: true,
-      dateDeleted: new Date().toISOString(),
+      isBinned: true,
+      dateBinned: new Date().toISOString(),
     });
   }
 
   unbin(noteId: string) {
     return this.notesRepository.update(noteId, {
-      isDeleted: false,
-      dateDeleted: null,
+      isBinned: false,
+      dateBinned: null,
     });
   }
 

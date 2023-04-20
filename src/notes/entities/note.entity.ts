@@ -33,10 +33,10 @@ export class Note {
   dateArchived!: Date | null;
 
   @Column('boolean', { default: false })
-  isDeleted!: boolean;
+  isBinned!: boolean;
 
   @Column('date', { nullable: true, default: null })
-  dateDeleted!: Date | null;
+  dateBinned!: Date | null;
 
   @CreateDateColumn()
   dateCreated!: Date;

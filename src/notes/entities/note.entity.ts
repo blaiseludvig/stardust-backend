@@ -1,3 +1,4 @@
+import { IsOptional } from 'class-validator';
 import { User } from 'src/users/entities/user.entity';
 import {
   Column,
@@ -29,13 +30,13 @@ export class Note {
   isArchived!: boolean;
 
   @Column('date', { nullable: true, default: null })
-  dateArchived!: Date;
+  dateArchived!: Date | null;
 
   @Column('boolean', { default: false })
   isDeleted!: boolean;
 
   @Column('date', { nullable: true, default: null })
-  dateDeleted!: Date;
+  dateDeleted!: Date | null;
 
   @CreateDateColumn()
   dateCreated!: Date;

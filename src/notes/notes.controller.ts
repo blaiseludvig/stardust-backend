@@ -52,9 +52,19 @@ export class NotesController {
     return this.notesService.archive(id);
   }
 
+  @Patch('unarchive/:id')
+  unarchive(@Param('id') id: string) {
+    return this.notesService.unarchive(id);
+  }
+
   @Delete('bin/:id')
   bin(@Param('id') id: string) {
     return this.notesService.bin(id);
+  }
+
+  @Patch('unbin/:id')
+  unbin(@Param('id') id: string) {
+    return this.notesService.unbin(id);
   }
 
   @Delete(':id')

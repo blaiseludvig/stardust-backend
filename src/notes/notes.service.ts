@@ -56,10 +56,24 @@ export class NotesService {
     });
   }
 
+  unarchive(noteId: string) {
+    return this.notesRepository.update(noteId, {
+      isArchived: false,
+      dateArchived: null,
+    });
+  }
+
   bin(noteId: string) {
     return this.notesRepository.update(noteId, {
       isDeleted: true,
       dateDeleted: new Date().toISOString(),
+    });
+  }
+
+  unbin(noteId: string) {
+    return this.notesRepository.update(noteId, {
+      isDeleted: false,
+      dateDeleted: null,
     });
   }
 

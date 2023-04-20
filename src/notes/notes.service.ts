@@ -50,6 +50,7 @@ export class NotesService {
   }
 
   archive(noteId: string) {
+    this.unbin(noteId);
     return this.notesRepository.update(noteId, {
       isArchived: true,
       dateArchived: new Date().toISOString(),
@@ -64,6 +65,7 @@ export class NotesService {
   }
 
   bin(noteId: string) {
+    this.unarchive(noteId);
     return this.notesRepository.update(noteId, {
       isDeleted: true,
       dateDeleted: new Date().toISOString(),

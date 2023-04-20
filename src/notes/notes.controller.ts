@@ -20,7 +20,7 @@ import { NotesService } from './notes.service';
 @UseFilters(new EntityNotFoundFilter())
 @Controller('notes')
 export class NotesController {
-  constructor(private readonly notesService: NotesService) {}
+  constructor(private readonly notesService: NotesService) { }
 
   @Get()
   findAllByUser(@ReqUser() user: ReqUser) {
@@ -57,7 +57,7 @@ export class NotesController {
     return this.notesService.unarchive(id);
   }
 
-  @Delete('bin/:id')
+  @Patch('bin/:id')
   bin(@Param('id') id: string) {
     return this.notesService.bin(id);
   }

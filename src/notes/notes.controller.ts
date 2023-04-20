@@ -47,6 +47,11 @@ export class NotesController {
     return this.notesService.update(id, updateNoteDto);
   }
 
+  @Patch('archive/:id')
+  archive(@Param('id') id: string) {
+    return this.notesService.archive(id);
+  }
+
   @Delete('bin/:id')
   bin(@Param('id') id: string) {
     return this.notesService.bin(id);

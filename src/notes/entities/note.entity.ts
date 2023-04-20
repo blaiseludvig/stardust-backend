@@ -26,6 +26,12 @@ export class Note {
   content!: string;
 
   @Column('boolean', { default: false })
+  isArchived!: boolean;
+
+  @Column('date', { nullable: true, default: null })
+  dateArchived!: Date;
+
+  @Column('boolean', { default: false })
   isDeleted!: boolean;
 
   @Column('date', { nullable: true, default: null })

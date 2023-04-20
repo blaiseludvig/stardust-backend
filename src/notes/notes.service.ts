@@ -49,6 +49,13 @@ export class NotesService {
     return this.notesRepository.update(noteId, updateNoteDto);
   }
 
+  archive(noteId: string) {
+    return this.notesRepository.update(noteId, {
+      isArchived: true,
+      dateArchived: new Date().toISOString(),
+    });
+  }
+
   bin(noteId: string) {
     return this.notesRepository.update(noteId, {
       isDeleted: true,

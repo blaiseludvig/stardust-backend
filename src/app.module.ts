@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { NotesModule } from './notes/notes.module';
 import { Note } from './notes/entities/note.entity';
 import CreateUserDto from './users/dto/create-user.dto';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import CreateUserDto from './users/dto/create-user.dto';
       entities: [User, Note],
       synchronize: true,
     }),
+    ConfigModule.forRoot(),
     UsersModule,
     AuthModule,
     NotesModule,
@@ -31,6 +33,7 @@ export class AppModule implements OnModuleInit {
   constructor(
     private readonly appService: AppService,
     private readonly usersService: UsersService,
+    private readonly configServcie: ConfigService,
   ) {}
 
   async onModuleInit() {

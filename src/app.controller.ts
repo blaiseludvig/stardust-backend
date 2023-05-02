@@ -22,24 +22,8 @@ import { Public } from './auth/public.decorator';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private readonly usersService: UsersService,
-    private readonly authService: AuthService,
-  ) {}
-
-  @Public()
-  @Post('/auth/signup')
-  async register(@Body() dto: CreateUserDto) {
-    return this.usersService.create(dto);
-  }
-
-  @Public()
-  @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
-  async login(@ReqUser() user: ReqUser) {
-    return this.authService.login(user);
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {}
 
   @UseFilters(UserDeletedFilter)
   @Get('profile')

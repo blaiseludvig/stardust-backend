@@ -17,13 +17,13 @@ export class AuthController {
   @Post('/signup')
   async register(@Body() dto: CreateUserDto) {
     const user = await this.usersService.create(dto);
-    return this.authService.login(user);
+    return this.authService.createJWT(user);
   }
 
   @Public()
   @UseGuards(LocalAuthGuard)
   @Post('/login')
   async login(@ReqUser() user: ReqUser) {
-    return this.authService.login(user);
+    return this.authService.createJWT(user);
   }
 }

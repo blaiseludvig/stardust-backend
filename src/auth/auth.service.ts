@@ -30,7 +30,7 @@ export class AuthService {
     }
   }
 
-  async login(user: Omit<User, 'password'>) {
+  async createJWT(user: Omit<User, 'password'>) {
     const payload = { sub: user.userId };
     return {
       access_token: this.jwtService.sign(payload),

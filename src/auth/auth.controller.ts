@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseFilters, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, UseFilters, UseGuards } from '@nestjs/common';
 import CreateUserDto from 'src/users/dto/create-user.dto';
 import { UserAlreadyExistsFilter } from 'src/users/exceptions/user-already-exists.filter';
 import { ReqUser } from 'src/users/user.decorator';
@@ -24,6 +24,7 @@ export class AuthController {
 
   @Public()
   @UseGuards(LocalAuthGuard)
+  @HttpCode(200)
   @Post('/login')
   async login(@ReqUser() user: ReqUser) {
     return this.authService.createJWT(user);

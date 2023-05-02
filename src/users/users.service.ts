@@ -5,6 +5,7 @@ import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import CreateUserDto from './dto/create-user.dto';
 import { UserDeletedException } from './exceptions/user-deleted.exception';
+import { UserAlreadyExistsException } from './exceptions/user-already-exists.exception';
 
 @Injectable()
 export class UsersService {
@@ -12,7 +13,11 @@ export class UsersService {
 
   userRepository = this.dataSource.getRepository(User);
 
-  create(user: CreateUserDto) {
+  async create(user: CreateUserDto) {
+    if (await this.userAlreadyExists(user.email)) {
+      throw new UserAlreadyExistsException();
+    }
+
     return this.userRepository.save({
       email: user.email,
       password: bcrypt.hashSync(user.password, 10),
@@ -38,7 +43,7 @@ export class UsersService {
   }
 
   findByEmail(email: string) {
-    return this.userRepository.findOneByOrFail({ email });
+    return this.userRepository.findOneBy({ email });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
@@ -47,5 +52,14 @@ export class UsersService {
 
   async remove(id: number) {
     return this.userRepository.remove(await this.findById(id));
+  }
+
+  async userAlreadyExists(email: string) {
+    const user = await this.findByEmail(email);
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

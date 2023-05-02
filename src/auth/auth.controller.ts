@@ -1,11 +1,13 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, UseFilters, UseGuards } from '@nestjs/common';
 import CreateUserDto from 'src/users/dto/create-user.dto';
+import { UserAlreadyExistsFilter } from 'src/users/exceptions/user-already-exists.filter';
 import { ReqUser } from 'src/users/user.decorator';
 import { UsersService } from 'src/users/users.service';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { Public } from './public.decorator';
 
+@UseFilters(new UserAlreadyExistsFilter())
 @Controller('auth')
 export class AuthController {
   constructor(

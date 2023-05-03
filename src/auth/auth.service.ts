@@ -31,7 +31,7 @@ export class AuthService {
     }
   }
 
-  createJWT(user: Omit<User, 'password'>): jwtResponseDto {
+  createJWT(user: Pick<User, 'userId'>): jwtResponseDto {
     const payload = { sub: user.userId };
 
     return {

@@ -12,16 +12,25 @@ import { NotesModule } from './notes/notes.module';
 import { Note } from './notes/entities/note.entity';
 import CreateUserDto from './users/dto/create-user.dto';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import configuration from './configuration';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'better-sqlite3',
-      database: 'db.sql',
-      entities: [User, Note],
-      synchronize: true,
+    ConfigModule.forRoot({
+      load: [configuration],
     }),
-    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => {
+        return {
+          type: 'better-sqlite3',
+          database: configService.get('DB_PATH'),
+          entities: [User, Note],
+          synchronize: true,
+        };
+      },
+      inject: [ConfigService],
+    }),
     UsersModule,
     AuthModule,
     NotesModule,

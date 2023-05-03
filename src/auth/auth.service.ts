@@ -31,7 +31,7 @@ export class AuthService {
     }
   }
 
-  async createJWT(user: Omit<User, 'password'>): Promise<jwtResponseDto> {
+  createJWT(user: Omit<User, 'password'>): jwtResponseDto {
     const payload = { sub: user.userId };
 
     return {

@@ -35,7 +35,8 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # better-sqlite3 database
-db.sql
+prod_db.sql
+dev_db.sql
 test_db.sql
 
 # .env file

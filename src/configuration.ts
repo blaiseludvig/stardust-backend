@@ -3,10 +3,14 @@ function getDatabasePath() {
 
   switch (process.env.NODE_ENV) {
     case 'production':
-      path = 'db.sql';
+      path = 'prod_db.sql';
       break;
 
     case 'development':
+      path = 'dev_db.sql';
+      break;
+
+    case 'test':
       path = 'test_db.sql';
       break;
 

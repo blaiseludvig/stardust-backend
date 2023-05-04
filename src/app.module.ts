@@ -1,7 +1,6 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import promptSync from 'prompt-sync';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
@@ -11,6 +10,7 @@ import { NotesModule } from './notes/notes.module';
 import { Note } from './notes/entities/note.entity';
 import CreateUserDto from './users/dto/create-user.dto';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AccountModule } from './account/account.module';
 import configuration from './configuration';
 
 @Module({
@@ -33,8 +33,8 @@ import configuration from './configuration';
     UsersModule,
     AuthModule,
     NotesModule,
+    AccountModule,
   ],
-  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

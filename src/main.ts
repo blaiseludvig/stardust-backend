@@ -19,6 +19,7 @@ async function bootstrap() {
   });
 
   const swaggerConfig = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('Stardust backend')
     .setDescription('API documentation for the Stardust backend')
     .setVersion('1.0')

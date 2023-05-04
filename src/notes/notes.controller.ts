@@ -10,6 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import UserAccountInfoDto from 'src/users/dto/user-account-info.dto';
 import { ReqUser } from 'src/users/user.decorator';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
@@ -23,7 +24,7 @@ export class NotesController {
   constructor(private readonly notesService: NotesService) { }
 
   @Get()
-  findAllByUser(@ReqUser() user: ReqUser) {
+  findAllByUser(@ReqUser() user: UserAccountInfoDto) {
     return this.notesService.findAllByUser(user);
   }
 
@@ -33,12 +34,12 @@ export class NotesController {
   }
 
   @Post()
-  create(@ReqUser() user: ReqUser, @Body() dto: CreateNoteDto) {
+  create(@ReqUser() user: UserAccountInfoDto, @Body() dto: CreateNoteDto) {
     return this.notesService.create(user, dto);
   }
 
   @Post('/god')
-  god(@ReqUser() user: ReqUser) {
+  god(@ReqUser() user: UserAccountInfoDto) {
     return this.notesService.create(user, createRandomNote());
   }
 

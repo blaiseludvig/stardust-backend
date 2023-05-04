@@ -19,6 +19,7 @@ import { User } from './users/entities/user.entity';
 import { ReqUser } from './users/user.decorator';
 import { UsersService } from './users/users.service';
 import { Public } from './auth/public.decorator';
+import UserAccountInfoDto from './users/dto/user-account-info.dto';
 
 @Controller()
 export class AppController {
@@ -27,7 +28,7 @@ export class AppController {
 
   @UseFilters(UserDeletedFilter)
   @Get('profile')
-  getProfile(@ReqUser() user: ReqUser) {
+  getProfile(@ReqUser() user: UserAccountInfoDto) {
     return user;
   }
 }

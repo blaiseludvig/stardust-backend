@@ -7,7 +7,6 @@ import {
   Patch,
   Post,
   UseFilters,
-  UseGuards,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -17,7 +16,6 @@ import {
   ApiTags,
   PickType,
 } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import UserAccountInfoDto from 'src/users/dto/user-account-info.dto';
 import { ReqUser } from 'src/users/user.decorator';
 import { CreateNoteDto } from './dto/create-note.dto';

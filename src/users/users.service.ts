@@ -47,7 +47,16 @@ export class UsersService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update(id, updateUserDto);
+    let password = undefined;
+
+    if (updateUserDto.password) {
+      password = bcrypt.hashSync(updateUserDto.password, 10);
+    }
+
+    return this.userRepository.update(id, {
+      email: updateUserDto.email,
+      password: password,
+    });
   }
 
   async remove(id: number) {

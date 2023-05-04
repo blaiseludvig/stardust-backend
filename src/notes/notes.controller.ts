@@ -50,26 +50,31 @@ export class NotesController {
 
   @Patch('archive/:id')
   archive(@Param('id') id: string) {
-    return this.notesService.archive(id);
+    this.notesService.archive(id);
+    return null;
   }
 
   @Patch('unarchive/:id')
   unarchive(@Param('id') id: string) {
-    return this.notesService.unarchive(id);
+    this.notesService.unarchive(id);
+    return null;
   }
 
   @Patch('bin/:id')
   bin(@Param('id') id: string) {
-    return this.notesService.bin(id);
+    this.notesService.bin(id);
+    return null;
   }
 
   @Patch('unbin/:id')
   unbin(@Param('id') id: string) {
-    return this.notesService.unbin(id);
+    this.notesService.unbin(id);
+    return null;
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.notesService.remove(id);
+    this.notesService.remove(id);
+    return null;
   }
 }

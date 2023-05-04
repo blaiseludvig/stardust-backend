@@ -25,18 +25,27 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
 
-  // UpdateUserDto currently not used in any controller
-  const document = SwaggerModule.createDocument(app, swaggerConfig, {
+  // UpdateUserDto is currently not used in any controllers
+  const swaggerDocumentOptions = {
     extraModels: [UpdateUserDto],
-  });
+  };
 
-  SwaggerModule.setup('docs', app, document, {
+  const swaggerCustomOptions = {
+    customSiteTitle: 'Stardust API',
     swaggerOptions: {
       customSiteTitle: 'Stardust API',
       defaultModelsExpandDepth: 10,
       defaultModelExpandDepth: 10,
     },
-  });
+  };
+
+  const document = SwaggerModule.createDocument(
+    app,
+    swaggerConfig,
+    swaggerDocumentOptions,
+  );
+
+  SwaggerModule.setup('docs', app, document, swaggerCustomOptions);
 
   await app.listen(3000);
 }

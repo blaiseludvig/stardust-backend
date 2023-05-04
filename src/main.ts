@@ -2,6 +2,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import UpdateUserDto from './users/dto/update-user.dto';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,7 +23,12 @@ async function bootstrap() {
     .setDescription('API documentation for the Stardust backend')
     .setVersion('1.0')
     .build();
-  const document = SwaggerModule.createDocument(app, swaggerConfig);
+
+  // UpdateUserDto currently not used in any controller
+  const document = SwaggerModule.createDocument(app, swaggerConfig, {
+    extraModels: [UpdateUserDto],
+  });
+
   SwaggerModule.setup('docs', app, document, {
     swaggerOptions: {
       defaultModelsExpandDepth: 10,

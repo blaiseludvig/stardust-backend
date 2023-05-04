@@ -32,6 +32,7 @@ async function bootstrap() {
 
   SwaggerModule.setup('docs', app, document, {
     swaggerOptions: {
+      customSiteTitle: 'Stardust API',
       defaultModelsExpandDepth: 10,
       defaultModelExpandDepth: 10,
     },

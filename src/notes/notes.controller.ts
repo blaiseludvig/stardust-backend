@@ -80,8 +80,9 @@ export class NotesController {
     type: NoteDto,
   })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateNoteDto: UpdateNoteDto) {
-    return this.notesService.update(id, updateNoteDto);
+  async update(@Param('id') id: string, @Body() updateNoteDto: UpdateNoteDto) {
+    this.notesService.update(id, updateNoteDto);
+    return this.notesService.findById(id);
   }
 
   @ApiOkResponse({ description: 'Returns 200 on successful archival' })

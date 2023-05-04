@@ -46,7 +46,7 @@ export class NotesService {
   }
 
   update(noteId: string, updateNoteDto: UpdateNoteDto) {
-    return this.notesRepository.update(noteId, updateNoteDto);
+    this.notesRepository.update(noteId, updateNoteDto);
   }
 
   archive(noteId: string) {

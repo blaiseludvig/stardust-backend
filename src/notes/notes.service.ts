@@ -12,7 +12,7 @@ export class NotesService {
 
   notesRepository = this.dataSource.getRepository(Note);
 
-  create(user: User, createNoteDto: CreateNoteDto) {
+  create(user: Pick<User, 'userId'>, createNoteDto: CreateNoteDto) {
     return this.notesRepository.save({
       user,
       ...createNoteDto,
@@ -23,7 +23,7 @@ export class NotesService {
     return this.notesRepository.find();
   }
 
-  findAllByUser(user: User) {
+  findAllByUser(user: Pick<User, 'userId'>) {
     return this.notesRepository.find({
       where: {
         user: {

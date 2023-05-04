@@ -79,6 +79,10 @@ export class NotesService {
     });
   }
 
+  emptyBin() {
+    this.notesRepository.delete({ isBinned: true });
+  }
+
   async remove(noteId: string) {
     return this.notesRepository.remove(await this.findById(noteId));
   }

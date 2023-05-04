@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
@@ -108,6 +109,16 @@ export class NotesController {
   @Patch('unbin/:id')
   unbin(@Param('id') id: string) {
     this.notesService.unbin(id);
+    return null;
+  }
+
+  @ApiOkResponse({
+    description: 'Returns 200 when bin is successfully emptied',
+  })
+  @HttpCode(200)
+  @Post('bin/empty')
+  emptyBin() {
+    this.notesService.emptyBin();
     return null;
   }
 

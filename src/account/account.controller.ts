@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Patch, UseFilters } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  UseFilters,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse } from '@nestjs/swagger';
 import UserAccountInfoDto from 'src/users/dto/user-account-info.dto';
 import { UserDeletedFilter } from 'src/users/exceptions/user-deleted.filter';
@@ -28,5 +35,10 @@ export class AccountController {
     @Body() updateUserDto: UpdateUserDto,
   ) {
     this.usersService.update(user.userId, updateUserDto);
+  }
+
+  @Delete()
+  deleteProfile(@ReqUser() user: UserAccountInfoDto) {
+    this.usersService.remove(user.userId);
   }
 }

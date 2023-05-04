@@ -32,7 +32,7 @@ import { NotesService } from './notes.service';
 @UseFilters(new EntityNotFoundFilter())
 @Controller('notes')
 export class NotesController {
-  constructor(private readonly notesService: NotesService) { }
+  constructor(private readonly notesService: NotesService) {}
 
   @ApiOkResponse({
     description: 'Returns an **array** containing all notes',

@@ -728,7 +728,3 @@ export function createRandomNote(): CreateNoteDto {
 
   return dto;
 }
-
-export function createRandomNoteArray(number: number) {
-  return Array.from({ length: number }, () => createRandomNote());
-}

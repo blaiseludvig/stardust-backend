@@ -13,7 +13,7 @@ export class Note {
   @PrimaryColumn()
   noteId!: string;
 
-  @ManyToOne(() => User, (user) => user.notes)
+  @ManyToOne(() => User, (user) => user.notes, { onDelete: 'CASCADE' })
   user!: User;
 
   @Column('text', { default: '' })

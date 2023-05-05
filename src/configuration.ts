@@ -22,7 +22,19 @@ function getDatabasePath() {
   return path;
 }
 
+function getJwtSecret() {
+  const JWT_SECRET = process.env.JWT_SECRET;
+
+  if (!JWT_SECRET) {
+    throw new Error(
+      'The JWT_SECRET environmental variable needs to be defined. Please define it in the .env file.',
+    );
+  }
+
+  return JWT_SECRET;
+}
+
 export default () => ({
-  JWT_SECRET: process.env.JWT_SECRET,
+  JWT_SECRET: getJwtSecret(),
   DB_PATH: getDatabasePath(),
 });

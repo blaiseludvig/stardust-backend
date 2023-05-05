@@ -29,6 +29,9 @@ export class AccountController {
     return user;
   }
 
+  @ApiOkResponse({
+    description: 'Returns 200 when the account is successfully updated',
+  })
   @Patch()
   updateProfile(
     @ReqUser() user: UserAccountInfoDto,
@@ -37,6 +40,9 @@ export class AccountController {
     this.usersService.update(user.userId, updateUserDto);
   }
 
+  @ApiOkResponse({
+    description: 'Returns 200 when the account is successfully deleted',
+  })
   @Delete()
   deleteProfile(@ReqUser() user: UserAccountInfoDto) {
     this.usersService.remove(user.userId);

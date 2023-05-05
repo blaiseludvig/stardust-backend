@@ -716,7 +716,7 @@ const CORPUS = [
   'rufus!',
 ];
 
-export function createRandomNote(): CreateNoteDto {
+export function getMessageFromGod(): CreateNoteDto {
   const dto = new CreateNoteDto();
   dto.title = faker.helpers
     .arrayElements(CORPUS, faker.datatype.number({ min: 2, max: 6 }))

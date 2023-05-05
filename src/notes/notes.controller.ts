@@ -23,7 +23,7 @@ import { CreateNoteDto } from './dto/create-note.dto';
 import NoteDto from './dto/note-dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { EntityNotFoundFilter } from './exceptions/note-not-found.filter';
-import { createRandomNote } from './god';
+import { getMessageFromGod } from './god';
 import { NotesService } from './notes.service';
 
 @ApiTags('Notes')
@@ -71,7 +71,7 @@ export class NotesController {
   })
   @Post('/god')
   god(@ReqUser() user: UserAccountInfoDto) {
-    return this.notesService.create(user, createRandomNote());
+    return this.notesService.create(user, getMessageFromGod());
   }
 
   @ApiOkResponse({

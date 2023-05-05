@@ -20,6 +20,7 @@
     "test:e2e": "cross-env NODE_ENV=test jest --runInBand --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@lukeed/uuid": "^2.0.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",

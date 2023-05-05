@@ -4,13 +4,13 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class Note {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   noteId!: string;
 
   @ManyToOne(() => User, (user) => user.notes)

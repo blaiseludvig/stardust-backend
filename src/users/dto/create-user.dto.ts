@@ -32,8 +32,8 @@ const pw: ValidationRules = {
 } as const;
 
 export default class CreateUserDto {
-  @IsDefined()
   @IsEmail()
+  @IsDefined()
   @ApiProperty({
     description: "The user's email address",
     example: 'example@gmail.com',
